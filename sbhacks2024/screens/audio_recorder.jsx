@@ -4,7 +4,7 @@ import { Audio } from 'expo-av';
 
 let recordingInstance = new Audio.Recording();
 
-export default function AudioRecorder(){
+export default function AudioRecorder( {navigation} ){
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const [isRecording, setIsRecording] = useState(false);
 
@@ -50,10 +50,20 @@ export default function AudioRecorder(){
     // })
   }
 
+  const handlePress = () => {
+    if(isRecording){
+      stopRecording();
+      navigation.navigate('EndScreen');
+    }
+    else{
+      startRecording();
+    }
+  }
+
   return (
     <View style = {{justifyContent: 'center', alignItems: 'center', marginTop: '22.5%'}}>
       <View style={{ marginTop: 16, width: 175, height: 175, borderRadius: 175, backgroundColor: 'lightgreen', overflow: 'hidden' }}>
-          <TouchableOpacity onPress={isRecording ? stopRecording : startRecording}>
+          <TouchableOpacity onPress={handlePress}>
               <Image source={require('../assets/puzzle.jpg')} style={{ width: 175, height: 175 , borderRadius: 175/2}} />
           </TouchableOpacity>
       </View>

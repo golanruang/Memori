@@ -29,8 +29,8 @@ const ModelResponse = ({ navigation }) => {
             </TouchableOpacity>
 
             {/* Microphone */}
-            <AudioRecorder />
-            
+            <AudioRecorder navigation={navigation}/>
+
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 
                 <Button
