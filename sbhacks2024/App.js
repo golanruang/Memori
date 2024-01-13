@@ -5,7 +5,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { AppProvider } from '../sbhacks2024/AppContext'
 import RootNavigation from './navigation/index';
 
-
 const App = () => {
   const [loading, setLoading] = useState(false);
 
@@ -20,8 +19,9 @@ const App = () => {
   }, []);
 
   return (
-    
+
     <RootNavigation />
+
     
   );
 }; 
