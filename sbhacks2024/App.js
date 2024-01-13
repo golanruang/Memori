@@ -32,10 +32,10 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
-          <Stack.Screen name="SelectTopic" component={SelectTopic} />
-          <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} />
-          <Stack.Screen name="ModelResponse" component={ModelResponse} />
-          <Stack.Screen name="EndScreen" component={EndScreen} />
+          <Stack.Screen name="SelectTopic" component={SelectTopic} options = {{headerShown: false }} />
+          <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} options = {{headerShown: false }} />
+          <Stack.Screen name="ModelResponse" component={ModelResponse} options = {{headerShown: false }} />
+          <Stack.Screen name="EndScreen" component={EndScreen} options = {{headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>

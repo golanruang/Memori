@@ -12,6 +12,10 @@ const ModelResponse = ({ navigation }) => {
                 title="Go to EndScreen"
                 onPress={() => navigation.navigate('EndScreen')}
             />
+            <Button
+                title="Question Prompt again"
+                onPress={() => navigation.navigate('QuestionPrompt')}
+            />
         </View>   
       );
 }
