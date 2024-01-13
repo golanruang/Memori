@@ -60,20 +60,20 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         borderRadius: 100,
-        backgroundColor: 'tan', // Change button color if needed
+        backgroundColor: 'tan', 
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 20,
     },
     rectangularButton: {
-        backgroundColor: 'tan', // Background color of the button
-        paddingHorizontal: 30, // Horizontal padding for wider button
-        paddingVertical: 10, // Vertical padding for button height
-        borderRadius: 5, // Rounded corners
-        alignItems: 'center', // Center text horizontally
-        justifyContent: 'center', // Center text vertically
-        width: '50%', // Use a percentage of screen width for button width
-        marginBottom: 20, // Space below the button
+        backgroundColor: 'tan', 
+        paddingHorizontal: 30, 
+        paddingVertical: 10, 
+        borderRadius: 5, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '50%', 
+        marginBottom: 20, 
     },
 
     buttonImage: {
@@ -87,18 +87,18 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     recent: {
-        width: 300,  // Adjust width as needed
-        height: 100, // Adjust height as needed
-        backgroundColor: '#f0f0f0', // Card background color
+        width: 300,  
+        height: 100, 
+        backgroundColor: '#f0f0f0', 
         marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3, // Shadow for Android
-        shadowColor: '#000', // Shadow for iOS
+        elevation: 3, // 
+        shadowColor: '#000', 
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        borderRadius: 8, // Rounded corners
+        borderRadius: 8, 
     },
     cardText: {
         fontSize: 18,
