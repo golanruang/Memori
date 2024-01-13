@@ -20,7 +20,7 @@ export default function UserStack() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
-        <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options = {{headerShown: false }} />
         <Stack.Screen name="SelectTopic" component={SelectTopic} />
         <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} />
         <Stack.Screen name="ModelResponse" component={ModelResponse} />
