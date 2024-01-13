@@ -7,6 +7,7 @@ import { AppProvider } from '../sbhacks2024/AppContext'
 
 import HomeScreen from '../sbhacks2024/screens/home';
 import LoadScreen from '../sbhacks2024/screens/load'
+import BottomMenu from '../sbhacks2024/bottomMenu';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,11 +16,12 @@ export default function App() {
     <AppProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Load" component={LoadScreen} />
+          <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
+          <Stack.Screen name="Load" component={LoadScreen} options = {{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>
+    
   );
 }
 
