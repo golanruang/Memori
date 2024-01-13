@@ -4,16 +4,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from 'react-native';
 
-const QuestionPrompt = ({ navigation }) => {
+const EndScreen = ({ navigation }) => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Prompting Question...</Text>
-            <Button
-                title="Go to ModelResponse"
-                onPress={() => navigation.navigate('ModelResponse')}
-            />
+            <Text>End Screen!</Text>
+            {/* <Button
+                title="Go to EndScreen"
+                onPress={() => navigation.navigate('EndScreen')}
+            /> */}
         </View>   
       );
 }
 
-export default QuestionPrompt;
+export default EndScreen;

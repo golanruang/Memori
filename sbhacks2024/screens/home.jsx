@@ -11,7 +11,7 @@ const HomeScreen = ({ navigation }) => {
             <Text>Home Screen</Text>
             <Button
                 title="Go to Details"
-                onPress={() => navigation.navigate('Load')}
+                onPress={() => navigation.navigate('SelectTopic')}
             />
         </View>   
       );
