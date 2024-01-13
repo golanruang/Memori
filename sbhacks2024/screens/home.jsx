@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.rectangularButton} 
-                    onPress={() => console.log('button pressed')}
+                    onPress={() => navigation.navigate('PreviousScreen')}
                     >
                     <Text style={styles.buttonText}>View Past Journals</Text>
                 </TouchableOpacity>
