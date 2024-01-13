@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.container}>
                 <Text style={styles.dateText}>January 13th, 2024</Text>    
                 <Text style={styles.welcomeText}>Welcome to Your Memori</Text>
-                <TouchableOpacity style={styles.circleButton} onPress={() => console.log('Circle Button Pressed')}>
+                <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('SelectTopic')}>
                     <Image 
                         source={{ uri: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5' }}
                         style={styles.buttonImage}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3, // 
+        elevation: 3, 
         shadowColor: '#000', 
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
