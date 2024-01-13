@@ -9,8 +9,8 @@ const QuestionPrompt = ({ navigation }) => {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Prompting Question...</Text>
             <Button
-                title="Go to ModelResponse"
-                onPress={() => navigation.navigate('ModelResponse')}
+                title="Go to ResponsePage"
+                onPress={() => navigation.navigate('ResponsePage')}
             />
         </View>   
       );

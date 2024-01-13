@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const HomeScreen = ({ navigation }) => {

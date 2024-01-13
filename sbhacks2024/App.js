@@ -9,23 +9,12 @@ import { AppProvider } from '../sbhacks2024/AppContext'
 import HomeScreen from '../sbhacks2024/screens/home';
 import SelectTopic from '../sbhacks2024/screens/select_topic';
 import QuestionPrompt from '../sbhacks2024/screens/question_prompt';
-import ModelResponse from './screens/model_response';
+import ResponsePage from './screens/response_page';
 import EndScreen from '../sbhacks2024/screens/EndScreen';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchingData = async () => {
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-
-      setLoading(false);
-    };
-
-    // fetchData();
-  }, []);
 
   return (
     <AppProvider>
@@ -34,7 +23,7 @@ const App = () => {
           <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
           <Stack.Screen name="SelectTopic" component={SelectTopic} options = {{headerShown: false }} />
           <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} options = {{headerShown: false }} />
-          <Stack.Screen name="ModelResponse" component={ModelResponse} options = {{headerShown: false }} />
+          <Stack.Screen name="ResponsePage" component={ResponsePage} options = {{headerShown: false }} />
           <Stack.Screen name="EndScreen" component={EndScreen} options = {{headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
