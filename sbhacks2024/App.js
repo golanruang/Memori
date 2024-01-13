@@ -33,13 +33,12 @@ const App = () => {
     <AppProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
           <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
           <Stack.Screen name="SelectTopic" component={SelectTopic} />
           <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} />
           <Stack.Screen name="ModelResponse" component={ModelResponse} />
           <Stack.Screen name="EndScreen" component={EndScreen} />
-          {/* <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
-          <Stack.Screen name="Load" component={LoadScreen} options = {{headerShown: false}}/> */}
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>
