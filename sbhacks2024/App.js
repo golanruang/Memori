@@ -11,6 +11,8 @@ import SelectTopic from '../sbhacks2024/screens/select_topic';
 import QuestionPrompt from '../sbhacks2024/screens/question_prompt';
 import ResponsePage from './screens/response_page';
 import EndScreen from '../sbhacks2024/screens/EndScreen';
+import LoadScreen from '../sbhacks2024/screens/load'
+import BottomMenu from '../sbhacks2024/bottomMenu';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +22,7 @@ const App = () => {
     <AppProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
           <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
           <Stack.Screen name="SelectTopic" component={SelectTopic} options = {{headerShown: false }} />
           <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} options = {{headerShown: false }} />
@@ -28,6 +31,7 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>
+    
   );
 }; 
 
