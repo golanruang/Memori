@@ -80,14 +80,14 @@ const styles = StyleSheet.create({
         borderRadius: 8, 
     },
     cardContent: {
-        flexDirection: 'row', // Aligns children (icon and text) in a row
-        alignItems: 'center', // Vertically centers children in the card
-        paddingHorizontal: 45, // Padding on the sides of the card
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: 45, 
     },
     cardText: {
         fontSize: 25,
         fontWeight: 'bold',
-        marginLeft: 20, // Space between icon and text
+        marginLeft: 20, 
     },
 });
 
