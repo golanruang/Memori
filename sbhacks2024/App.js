@@ -1,14 +1,46 @@
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+// import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppProvider } from '../sbhacks2024/AppContext'
 
-export default function App() {
+import HomeScreen from '../sbhacks2024/screens/home';
+import SelectTopic from '../sbhacks2024/screens/select_topic';
+import QuestionPrompt from '../sbhacks2024/screens/question_prompt';
+import ModelResponse from './screens/model_response';
+import EndScreen from '../sbhacks2024/screens/EndScreen';
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      // await new Promise(resolve => setTimeout(resolve, 2000));
+
+      setLoading(false);
+    };
+
+    // fetchData();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
+          <Stack.Screen name="SelectTopic" component={SelectTopic} />
+          <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} />
+          <Stack.Screen name="ModelResponse" component={ModelResponse} />
+          <Stack.Screen name="EndScreen" component={EndScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
-}
+}; 
 
 const styles = StyleSheet.create({
   container: {
@@ -18,3 +50,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
