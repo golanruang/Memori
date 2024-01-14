@@ -18,7 +18,7 @@ const saveJournalToFirestore = async (topic, combinedJournal) => {
           text: combinedJournal,
           createdAt: new Date()
         });
-        console.log("Journal saved successfully");
+        //console.log("Journal saved successfully");
       } catch (error) {
         console.error("Error saving journal: ", error);
         // Handle the error appropriately
@@ -50,7 +50,7 @@ const ModelResponse = ({ route, navigation }) => {
                 multiline
             />
             <Button
-                title="Go to EndScreen"
+                title="Finish Writing"
                 onPress={handlePress}
             />
             <Button
