@@ -62,7 +62,7 @@ const BottomMenu = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={HomeScreen}
+          component={Settings}
           options={{
             tabBarLabel: "",
             tabBarIcon: ({ focused }) => (

@@ -1,11 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
-import { Image } from 'react-native';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-// import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import BottomMenu from '../bottomMenu';
 
 
 const SelectTopic = ({ navigation }) => {

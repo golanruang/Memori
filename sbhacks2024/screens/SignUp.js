@@ -1,29 +1,38 @@
-import React from 'react';
+import React from "react";
 import favicon from "../assets/favicon.png";
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { Image, Pressable, StyleSheet, TextInput, Text, View } from 'react-native';
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Text,
+  View,
+} from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import memorilogo from "sbhacks2024/assets/logo4.png";
+import { ImageBackground } from "react-native";
 
 const auth = getAuth();
 
 function SignUpScreen({ navigation }) {
   const [value, setValue] = React.useState({
-    email: '',
-    password: '',
-    error: ''
+    email: "",
+    password: "",
+    error: "",
   });
 
   async function signUp() {
-    if (value.email === '' || value.password === '') {
+    if (value.email === "" || value.password === "") {
       setValue({
         ...value,
-        error: 'Email and password are mandatory.'
+        error: "Email and password are mandatory.",
       });
       return;
     }
     try {
       await createUserWithEmailAndPassword(auth, value.email, value.password);
-      navigation.navigate('Sign In');
+      navigation.navigate("Sign In");
     } catch (error) {
       console.error("Firebase error", error);
       setValue({
@@ -34,16 +43,20 @@ function SignUpScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require("sbhacks2024/assets/homebackground.jpeg")} // Replace with your image path
+      style={styles.container}
+      resizeMode="cover" // or "contain", depending on your need
+    >
       <View style={styles.innerContainer}>
-        <Image source={favicon} style={styles.image} />
+        <Image source={memorilogo} style={styles.image} />
         <Text style={styles.headerText}>Sign Up</Text>
 
         <View style={styles.inputContainer}>
           <View style={styles.inputField}>
             <Icon name="email" size={18} color="gray" style={styles.icon} />
             <TextInput
-              placeholder='Email'
+              placeholder="Email"
               value={value.email}
               style={styles.input}
               onChangeText={(text) => setValue({ ...value, email: text })}
@@ -66,10 +79,16 @@ function SignUpScreen({ navigation }) {
         </Pressable>
 
         <Text style={styles.footerText}>
-          Have an account? <Text style={styles.signInText} onPress={() => navigation.navigate('Sign In')}>Sign In</Text>
+          Have an account?{" "}
+          <Text
+            style={styles.signInText}
+            onPress={() => navigation.navigate("Sign In")}
+          >
+            Sign In
+          </Text>
         </Text>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -78,72 +97,75 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0e1529', // Adjust as needed
+    justifyContent: "center",
+    alignItems: "center",
   },
   innerContainer: {
-    margin: 16,
-    flex: 0.83, // Adjust as needed to mimic h-5/6
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "90%", // Adjust the width as needed
+    alignItems: "center",
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     alignSelf: "center",
   },
   headerText: {
-    color: 'white',
+    color: "white",
     fontSize: 24, // Equivalent to text-2xl
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 10,
+    fontFamily: "marcellus",
+    color: "#261e29",
   },
   inputContainer: {
-    width: '100%', // Adjust as needed
-    justifyContent: 'center',
-    alignItems: 'center',
-    // Add space-y-6 equivalent if needed
+    width: "100%",
   },
   inputField: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30, // Adjust as needed, equivalent to rounded-xl
-    paddingHorizontal: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 30, // Equivalent to rounded-xl
+    paddingHorizontal: 10,
     paddingVertical: 8,
-    backgroundColor: '#f0f0f0', // Adjust as needed, equivalent to bg-gray-100
-    marginTop: 10, // Adjust as needed, equivalent to mt-1
+    backgroundColor: "#bfb3ce", // Adjust as needed, equivalent to bg-gray-100
+    marginTop: 10,
   },
   icon: {
     padding: 10,
+    color: "#261e29",
   },
   input: {
     flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
-    backgroundColor: '#fff',
-    color: '#424242',
+    padding: 10,
+    backgroundColor: "#fff",
+    color: "#424244",
   },
   button: {
-    backgroundColor: 'blue', // Adjust as needed, equivalent to bg-blue
-    borderRadius: 30, // Adjust as needed, equivalent to rounded-3xl
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    margin: 16,
+    backgroundColor: "#8d6f98",
+    marginTop: 15,
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    margin: 5,
   },
+
   buttonText: {
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16, // Adjust as needed, equivalent to text-base
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+    fontFamily: "marcellus",
   },
+
   footerText: {
-    color: 'white',
-    fontSize: 16, // Adjust as needed, equivalent to text-base
-    textAlign: 'center',
+    color: "#261e29",
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 10,
+    fontFamily: "marcellus",
   },
-  signInText: {
-    color: 'blue', // Adjust as needed, equivalent to text-blue
-  }
-  });
+  signUpText: {
+    color: "#8d6f98",
+    fontWeight: "bold",
+  },
+});
