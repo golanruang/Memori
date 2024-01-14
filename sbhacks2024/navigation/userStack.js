@@ -15,6 +15,7 @@ import EndScreen from '../screens/EndScreen';
 import LoadScreen from '../screens/load'
 import JournalDetailScreen from "../screens/JournalScreen";
 import BottomMenu from '../bottomMenu';
+import ProfilePage from '../screens/profile'
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ export default function UserStack() {
         <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} options = {{headerShown: false}} />
         <Stack.Screen name="ModelResponse" component={ModelResponse} options = {{headerShown: false}} />
         <Stack.Screen name="EndScreen" component={EndScreen} options = {{headerShown: false}} />
+        <Stack.Screen name="ProfilePage" component={ProfilePage} options = {{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   </AppProvider>
