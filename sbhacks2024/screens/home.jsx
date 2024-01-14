@@ -1,8 +1,45 @@
-import React from "react";
-import { ScrollView, View, Text, TouchableOpacity, Image, ImageBackground, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { getFirestore, collection, query, getDocs, orderBy, limit } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
+const db = getFirestore();
+const auth = getAuth();
+
+const fetchRecentJournals = async () => {
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const journalsRef = collection(db, "users", user.uid, "journals");
+  const q = query(journalsRef, orderBy("createdAt", "desc"), limit(3));
+
+  try {
+    const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, ' => ', doc.data());
+    //   });
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error fetching journals: ", error);
+    return [];
+  }
+};
 
 const HomeScreen = ({ navigation }) => {
+    const [journals, setJournals] = useState([]);
+
+    useEffect(() => {
+        const loadJournals = async () => {
+            const recentJournals = await fetchRecentJournals();
+            setJournals(recentJournals);
+        };
+
+        loadJournals();
+    }, []);
+
+    const onCardPress = (journalId) => {
+        navigation.navigate('JournalDetailScreen', { journalId });
+    };
     return (
         <ImageBackground
             source={require("sbhacks2024/assets/homebackground.jpeg")} // Specify the path to your background image
@@ -27,20 +64,24 @@ const HomeScreen = ({ navigation }) => {
                     </TouchableOpacity>
                     <Text style={styles.recentText}>Recent Entries</Text>
 
-                    <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
-                        <Text style={styles.cardText}>Card 1</Text>
+                {journals.map((journal, index) => (
+                    <TouchableOpacity 
+                        key={index} 
+                        style={styles.recent} 
+                        onPress={() => onCardPress(journal.id)}
+                    >
+                        <Text style={styles.cardText}>{journal.topic}     {journal.createdAt.toDate().toLocaleDateString()}</Text>
+                        {/* Display a preview of the journal entry */}
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
-                        <Text style={styles.cardText}>Card 2</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
-                        <Text style={styles.cardText}>Card 3</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        </ImageBackground>
+                ))}
+            </View>
+        </ScrollView>
+  </ImageBackground>
+
     );
 };
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
     backgroundImage: {
@@ -135,5 +176,3 @@ const styles = StyleSheet.create({
         fontFamily: 'marcellus',
     },
 });
-
-export default HomeScreen;

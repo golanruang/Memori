@@ -5,33 +5,36 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 
 
 const SelectTopic = ({ navigation }) => {
+    const handlePress = (topic) => {
+        navigation.navigate('QuestionPrompt', { selectedTopic: topic });
+    };
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
                 <Text style={styles.title}>What's on your mind today?</Text>
                 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Youth')}>
                     <View style={styles.cardContent}>
                         <MaterialCommunityIcon name="car-child-seat" size={30} color="#000"/>
                         <Text style={styles.cardText}>Adolescence</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Teen')}>
                     <View style={styles.cardContent}>
                         <MaterialIcon name="emoji-emotions" size={30} color="#000" />
                         <Text style={styles.cardText}>Relationships</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Middle')}>
                     <View style={styles.cardContent}>
                         <MaterialIcon name="face" size={30} color="#000" />
                         <Text style={styles.cardText}>Hobbies</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Late')}>
                     <View style={styles.cardContent}>
                         <MaterialIcon name="grade" size={30} color="#000" style={styles.iconStyle} />
                         <Text style={styles.cardText}>Achievements</Text>
