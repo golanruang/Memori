@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { getFirestore, collection, query, getDocs, orderBy, limit } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const db = getFirestore();
 const auth = getAuth();
+
+const formatDate = (date) => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+  
+    return date.toLocaleDateString(undefined, options);
+};
 
 const fetchRecentJournals = async () => {
   const user = auth.currentUser;
@@ -41,23 +51,28 @@ const HomeScreen = ({ navigation }) => {
         navigation.navigate('JournalDetailScreen', { journalId });
     };
     return (
-        <ScrollView style={styles.scrollView}>
-            <View style={styles.container}>
-                <Text style={styles.dateText}>January 13th, 2024</Text>    
-                <Text style={styles.welcomeText}>Welcome to Your Memori</Text>
-                <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('SelectTopic')}>
-                    <Image 
-                        source={{ uri: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5' }}
-                        style={styles.buttonImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.rectangularButton} 
-                    onPress={() => navigation.navigate('PreviousScreen')}
+        <ImageBackground
+            source={require("sbhacks2024/assets/homebackground.jpeg")} 
+            style={styles.backgroundImage}
+        >
+            <ScrollView style={styles.scrollView}>
+                <View style={styles.container}>
+                    <Text style={styles.dateText}>SUN, JAN 14</Text>    
+                    <Text style={styles.welcomeText}>Welcome to Your</Text>
+                    <Text style={styles.memoriText}>Memori</Text>
+                    <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('SelectTopic')}>
+                        <Image
+                            source={require("sbhacks2024/assets/logo2.png")}
+                            style={styles.buttonImage}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.rectangularButton} 
+                        onPress={() => navigation.navigate('PreviousScreen')}
                     >
-                    <Text style={styles.buttonText}>View Past Journals</Text>
-                </TouchableOpacity>
-                <Text style={styles.recentText}>Recent Entries</Text>
+                        <Text style={styles.buttonText}>View Past Journals</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.recentText}>Recent Entries</Text>
 
                 {journals.map((journal, index) => (
                     <TouchableOpacity 
@@ -65,68 +80,100 @@ const HomeScreen = ({ navigation }) => {
                         style={styles.recent} 
                         onPress={() => onCardPress(journal.id)}
                     >
-                        <Text style={styles.cardText}>{journal.topic}     {journal.createdAt.toDate().toLocaleDateString()}</Text>
-                        {/* Display a preview of the journal entry */}
+                        <Text style={styles.cardText}>
+                                {formatDate(journal.createdAt.toDate())}
+                                {'\n'} 
+                                {journal.topic}
+                        </Text>
                     </TouchableOpacity>
                 ))}
             </View>
         </ScrollView>
+  </ImageBackground>
+
     );
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover', 
+        justifyContent: 'center', 
+    },
+    scrollView: {
+        flex: 1,
+    },
     container: {
-        backgroundColor: '#fff',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     dateText: {
         marginTop: 50,
-        fontSize: 18,
-        marginBottom: 12,
+        fontSize: 20,
+        marginBottom: 10,
+        fontFamily: 'marcellus',
     },
     welcomeText: {
-        fontSize: 24,
+        fontSize: 38,
+        fontFamily: 'marcellus',
+        textAlign: 'center'
+    },
+    memoriText: {
+        fontSize: 46,
         fontWeight: 'bold',
         marginBottom: 20,
+        fontFamily: 'marcellus',
+        textAlign: 'center'
     },
     circleButton: {
         width: 200,
         height: 200,
         borderRadius: 100,
-        backgroundColor: 'tan', 
+        backgroundColor: '#6c636b', 
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 20,
     },
+
     rectangularButton: {
-        backgroundColor: 'tan', 
+        backgroundColor: '#6c636b', 
         paddingHorizontal: 30, 
         paddingVertical: 10, 
         borderRadius: 5, 
         alignItems: 'center',
         justifyContent: 'center',
-        width: '50%', 
+        width: '60%', 
         marginBottom: 20, 
+        marginTop: 40,
     },
 
     buttonImage: {
-        width: 100, 
-        height: 100, 
-        resizeMode: 'contain',
+        marginTop: 16,
+        marginLeft: 1,
+        width: 450, 
+        height: 450, 
     },
     recentText: {
-        fontSize: 24,
+        fontSize: 27,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginTop: 15,
+        marginBottom: 12,
+        fontFamily: 'marcellus',
+    },
+    buttonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'marcellus',
+        textAlign: 'center',
+        color: '#e7dee9'
     },
     recent: {
-        width: 300,  
-        height: 100, 
-        backgroundColor: '#f0f0f0', 
+        width: 290,  
+        height: 80, 
+        backgroundColor: '#6c636b', 
         marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -138,9 +185,10 @@ const styles = StyleSheet.create({
         borderRadius: 8, 
     },
     cardText: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
+        fontFamily: 'marcellus',
+        color: '#e7dee9',
+        textAlign: 'center'
     },
 });
-
-

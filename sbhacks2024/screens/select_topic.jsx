@@ -1,10 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import BottomMenu from '../bottomMenu';
 
 
 const SelectTopic = ({ navigation }) => {
@@ -12,50 +9,101 @@ const SelectTopic = ({ navigation }) => {
         navigation.navigate('QuestionPrompt', { selectedTopic: topic });
     };
     return (
+      <ImageBackground
+        source={require("sbhacks2024/assets/homebackground.jpeg")} // Specify the path to your background image
+        style={styles.backgroundImage}
+      >
         <ScrollView style={styles.scrollView}>
-            <View style={styles.container}>
-                <Text style={styles.title}>What would you like to talk about today?</Text>
-                
-                <TouchableOpacity style={styles.card} onPress={() => handlePress('Youth')}>
-                    <View style={styles.cardContent}>
-                        <MaterialCommunityIcon name="car-child-seat" size={30} color="#000"/>
-                        <Text style={styles.cardText}>Youth</Text>
-                    </View>
-                </TouchableOpacity>
+          <View style={styles.container}>
+            <Text style={styles.title}>What's on your mind today?</Text>
 
-                <TouchableOpacity style={styles.card} onPress={() => handlePress('Teen')}>
-                    <View style={styles.cardContent}>
-                        <MaterialIcon name="emoji-emotions" size={30} color="#000" />
-                        <Text style={styles.cardText}>Teen</Text>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.card} onPress={() => handlePress('Middle')}>
-                    <View style={styles.cardContent}>
-                        <MaterialIcon name="face" size={30} color="#000" />
-                        <Text style={styles.cardText}>Middle</Text>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.card} onPress={() => handlePress('Late')}>
-                    <View style={styles.cardContent}>
-                        <MaterialIcon name="grade" size={30} color="#000" style={styles.iconStyle} />
-                        <Text style={styles.cardText}>Late</Text>
-                    </View>
-                </TouchableOpacity>
-
-                <Button
-                    title="Go to QuestionPrompt"
-                    onPress={() => navigation.navigate('QuestionPrompt')}
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handlePress("Adolescence")}
+            >
+              <View style={styles.cardContent}>
+                <MaterialCommunityIcon
+                  name="car-child-seat"
+                  size={30}
+                  color="#000"
                 />
-            </View>   
+                <Text style={styles.cardText}>Adolescence</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handlePress("Relationships")}
+            >
+              <View style={styles.cardContent}>
+                <MaterialIcon name="emoji-emotions" size={30} color="#000" />
+                <Text style={styles.cardText}>Relationships</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handlePress("Hobbies")}
+            >
+              <View style={styles.cardContent}>
+                <MaterialIcon name="face" size={30} color="#000" />
+                <Text style={styles.cardText}>Hobbies</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handlePress("Achievements")}
+            >
+              <View style={styles.cardContent}>
+                <MaterialIcon
+                  name="grade"
+                  size={30}
+                  color="#000"
+                  style={styles.iconStyle}
+                />
+                <Text style={styles.cardText}>Achievements</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handlePress("Wisdom")}
+            >
+              <View style={styles.cardContent}>
+                <MaterialIcon
+                  name="grade"
+                  size={30}
+                  color="#000"
+                  style={styles.iconStyle}
+                />
+                <Text style={styles.cardText}>Wisdom</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handlePress("Recent Life")}
+            >
+              <View style={styles.cardContent}>
+                <MaterialIcon
+                  name="grade"
+                  size={30}
+                  color="#000"
+                  style={styles.iconStyle}
+                />
+                <Text style={styles.cardText}>Recent Life</Text>
+              </View>
+            </TouchableOpacity>
+
+          </View>
         </ScrollView>
-      );
+      </ImageBackground>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -68,11 +116,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginLeft: 40,
         marginRight: 40,
+        fontFamily: 'marcellus',
     },
     card: {
-        width: 250,  
+        width: 270,  
         height: 100, 
-        backgroundColor: '#f0f0f0', 
+        backgroundColor: '#6c636b', 
         marginBottom: 20,
         justifyContent: 'center',
         elevation: 3, 
@@ -85,12 +134,14 @@ const styles = StyleSheet.create({
     cardContent: {
         flexDirection: 'row', 
         alignItems: 'center', 
-        paddingHorizontal: 45, 
+        paddingHorizontal: 27, 
     },
     cardText: {
-        fontSize: 25,
+        fontSize: 26,
         fontWeight: 'bold',
-        marginLeft: 20, 
+        marginLeft: 15, 
+        fontFamily: 'marcellus',
+        color: "#e7dee9"
     },
 });
 

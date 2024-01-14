@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  ImageBackground,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native-gesture-handler";
@@ -39,39 +40,45 @@ const PreviousScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.scrollView}>
-      <View style={styles.container}>
-        <Text style={styles.title}>View your past journals by category</Text>
-        <Picker
-          style={styles.pickerContainer}
-          itemStyle={styles.pickerItem}
-          selectedValue={selectedCategory}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedCategory(itemValue)
-          }
-        >
-          <Picker.Item label="Select Category" value="Select" />
-          <Picker.Item label="Youth" value="Youth" />
-          <Picker.Item label="Relationships" value="Relationships" />
-          <Picker.Item label="Hobbies" value="Hobbies" />
-          <Picker.Item label="Achievements" value="Achievements" />
-          <Picker.Item label="Wisdom" value="Wisdom" />
-          <Picker.Item label="Recent Life" value="Recent Life" />
-        </Picker>
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+    <ImageBackground
+        source={require("sbhacks2024/assets/homebackground.jpeg")} // Specify the path to your background image
+        style={styles.backgroundImage}
+    >
+        <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+            <Text style={styles.title}>View Your Memories</Text>
+            <Picker
+            style={styles.pickerContainer}
+            itemStyle={styles.pickerItem}
+            selectedValue={selectedCategory}
+            onValueChange={(itemValue, itemIndex) =>
+                setSelectedCategory(itemValue)
+            }
+            >
+            <Picker.Item label="Select Category" value="Select" />
+            <Picker.Item label="Youth" value="Youth" />
+            <Picker.Item label="Relationships" value="Relationships" />
+            <Picker.Item label="Hobbies" value="Hobbies" />
+            <Picker.Item label="Achievements" value="Achievements" />
+            <Picker.Item label="Wisdom" value="Wisdom" />
+            <Picker.Item label="Recent Life" value="Recent Life" />
+            </Picker>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+        </View>
+        </ScrollView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 5,
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 250,
+    },
   title: {
     marginTop: 50,
     fontSize: 30,
@@ -79,15 +86,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginLeft: 40,
     marginRight: 40,
+    fontFamily: "marcellus",
   },
   pickerContainer: {
     width: "75%",
-    height: 50,
+    height: 65,
     marginBottom: 12,
   },
   button: {
     marginTop: 60,
-    backgroundColor: "tan", 
+    opacity: 0.87,
+    backgroundColor: "#6c636b", 
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 25,
@@ -100,12 +109,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#ffffff", 
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    fontFamily: "marcellus",
   },
   pickerItem: {
-    height: 108, 
+    height: 125, 
     fontSize: 20, 
+    fontFamily: "marcellus",
   },
 });
 
