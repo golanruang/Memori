@@ -1,63 +1,37 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-// const { Configuration, OpenAIApi } = require('openai');
-// import {OPENAI_API_KEY} from "@env"
-const OpenAIApi = require('openai');
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from 'react-native';
+import AudioRecorder from './audio_recorder';
+// import { useChatCompletion } from 'openai-streaming-hooks';
 
-// const session = await createSession(req, res);
-// if (!session.isConnected) throw new Error('Not connected');
+// Dependencies for callable functions.
+// const {onCall, HttpsError} = require("firebase-functions/v2/https");
+// const {logger} = require("firebase-functions/v2");
 
-let key = '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'
-
-const openai = new OpenAIApi({
-    // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: key,
-    dangerouslyAllowBrowser: true,
-});
+// // Dependencies for the addMessage function.
+// const {getDatabase} = require("firebase-admin/database");
+// const sanitizer = require("./sanitizer");
 
 const ModelResponse = ({ navigation }) => {
-    const [input, setInput] = useState('');
-    const [output, setOutput] = useState('');
-  
-  const generatePrompt = async () => {
-    const { data } = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        n: 1,
-        max_tokens: 2048,
-        temperature: 0.3,
-        stream: true,
-        prompt: `Generate a conversational prompt for the elderly based on when they were ${"10-20"} years old.`
-    }, {
-        timeout: 1000 * 60 * 2,
-        responseType: 'stream'
-    });
+    
+    // const { messages, submitPrompt } = useChatCompletion({
+    //     model: 'gpt-3.5-turbo', 
+    //     apiKey: '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', 
+    //     temperature: 0.5,
+    //   });
 
-    data.on('data', text => {
-        const lines = text.toString().split('\n').filter(line => line.trim() !== '');
-        for (const line of lines) {
-            const message = line.replace(/^data: /, '');
-            if (message === '[DONE]') { //OpenAI sends [DONE] to say it's over
-                session.push('DONE', 'error');
-            return;
-            }
-            try {
-            const { choices } = JSON.parse(message);
-                session.push({text:choices[0].text});
-            } catch (err) {
-                console.log(err);
-            }
-        }
 
-        data.on('close', () => { 
-        console.log("close")
-        res.end();
-    });
+    // useEffect((time_period) => {
+    //     let prompt_text = `Generate an open ended question for the user about when they were ${'10-20'} years old.`;
+    //     submitPrompt([{ content: prompt_text, role: 'user' }]);
+    // }, []);
 
-    data.on('error', (err) => {
-        console.error(err);
-    });
+    const getGPTOutput = () => {
+        // call firebase function and get GPT 
 
-    });
+    }
 
     return (
         <View>
