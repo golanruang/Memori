@@ -55,7 +55,7 @@ const QuestionPrompt = ({ route, navigation }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );
@@ -77,6 +77,7 @@ const QuestionPrompt = ({ route, navigation }) => {
   }, []);
 
   return (
+    
     <View>
       <Text style={styles.title}>Journal Prompt:</Text>
       <View
