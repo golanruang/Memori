@@ -6,7 +6,7 @@ import SelectTopicScreen from './screens/select_topic';
 import Settings from './screens/Settings';
 import { Image } from 'react-native'; 
 import { StyleSheet } from 'react-native';
-
+import ProfilePage from './screens/ProfilePage';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,7 +62,7 @@ const BottomMenu = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={Settings}
+          component={ProfilePage}
           options={{
             tabBarLabel: "",
             tabBarIcon: ({ focused }) => (
