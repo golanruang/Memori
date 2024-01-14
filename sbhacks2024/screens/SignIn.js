@@ -1,8 +1,16 @@
 import React from "react";
-import favicon from "../assets/favicon.png";
+import memorilogo from "sbhacks2024/assets/logo4.png";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { Image, Pressable, StyleSheet, TextInput, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Text,
+  View,
+} from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ImageBackground } from "react-native";
 
 const auth = getAuth();
 
@@ -33,9 +41,13 @@ function SignInScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require("sbhacks2024/assets/homebackground.jpeg")} // Replace with your image path
+      style={styles.container}
+      resizeMode="cover" // or "contain", depending on your need
+    >
       <View style={styles.innerContainer}>
-        <Image source={favicon} style={styles.image} />
+        <Image source={memorilogo} style={styles.image} />
         <Text style={styles.headerText}>Sign In</Text>
 
         <View style={styles.inputContainer}>
@@ -64,14 +76,17 @@ function SignInScreen({ navigation }) {
         </Pressable>
 
         <Text style={styles.footerText}>
-          Don't Have an account?{" "}
-          <Text style={styles.signUpText} onPress={() => navigation.navigate("Sign Up")}>
-            Sign Up
+          Don't have an account?{" "}
+          <Text
+            style={styles.signUpText}
+            onPress={() => navigation.navigate("Sign Up")}
+          >
+            Sign Up!
           </Text>
         </Text>
       </View>
-    </View>
-);
+    </ImageBackground>
+  );
 }
 
 export default SignInScreen;
@@ -79,69 +94,75 @@ export default SignInScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0e1529', // Adjust the background color as needed
+    justifyContent: "center",
+    alignItems: "center",
   },
   innerContainer: {
-    width: '90%', // Adjust the width as needed
-    alignItems: 'center',
+    width: "90%", // Adjust the width as needed
+    alignItems: "center",
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     alignSelf: "center",
   },
   headerText: {
-    color: 'white',
+    color: "white",
     fontSize: 24, // Equivalent to text-2xl
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginVertical: 10,
+    fontFamily: "marcellus",
+    color: "#261e29",
   },
   inputContainer: {
-    width: '100%',
-    marginTop: 10,
+    width: "100%",
   },
   inputField: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderRadius: 30, // Equivalent to rounded-xl
-    paddingHorizontal: 8,
+    paddingHorizontal: 10,
     paddingVertical: 8,
-    backgroundColor: '#f0f0f0', // Adjust as needed, equivalent to bg-gray-100
+    backgroundColor: "#bfb3ce", // Adjust as needed, equivalent to bg-gray-100
     marginTop: 10,
   },
   icon: {
     padding: 10,
+    color: "#261e29",
   },
   input: {
     flex: 1,
     padding: 10,
     backgroundColor: "#fff",
-    color: "#424242",
+    color: "#424244",
   },
   button: {
-    backgroundColor: 'blue', // Adjust as needed, equivalent to bg-background
-    borderRadius: 30, // Equivalent to rounded-3xl
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 10,
+    backgroundColor: "#8d6f98",
+    marginTop: 15,
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    margin: 5,
   },
+
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
+    fontFamily: "marcellus",
   },
+
   footerText: {
-    color: 'white',
+    color: "#261e29",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 10,
+    fontFamily: "marcellus",
   },
   signUpText: {
-    color: 'blue', // Adjust as needed, equivalent to text-blue
-    fontWeight: 'bold',
+    color: "#8d6f98",
+    fontWeight: "bold",
   },
 });
