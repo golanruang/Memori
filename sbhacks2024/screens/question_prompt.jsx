@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet  } from 'react-native';
 import axios from 'axios';
 
-const ChatGPT35 = () => {
-  const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState('');
-  const [output, setOutput] = useState([]);
+const QuestionPrompt = ({ route, navigation }) => {
+    const [selectedTopic, setSelectedTopic] = useState('');
+    const [journal, setJournal] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [inputText, setInputText] = useState('');
+    const [output, setOutput] = useState([]);
+
+    useEffect(() => {
+        if (route.params?.selectedTopic) {
+            setSelectedTopic(route.params.selectedTopic);
+        }
+    }, [route.params?.selectedTopic]);
+
+    const handlePress = () => {
+        // Pass both selectedTopic and journal to the ModelResponse screen
+        navigation.navigate('ModelResponse', {
+            selectedTopic: selectedTopic,
+            journal: journal
+        });
+    };
 
   const sendMessage = async (prompt) => {
 
@@ -22,7 +38,7 @@ const ChatGPT35 = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer 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',
           },
         }
       );
@@ -56,7 +72,30 @@ const ChatGPT35 = () => {
                 </Text>
             </View>
         </View>
+        <TextInput
+                style={styles.input}
+                placeholder="Write your journal prompt here"
+                value={journal}
+                onChangeText={setJournal}
+                multiline
+            />
+            <Button
+                title="Go to ModelResponse"
+                onPress={handlePress}
+            />
     </View>
   );
 };
-export default ChatGPT35;
+export default QuestionPrompt;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        marginBottom: 20,
+        fontSize: 18,
+        textAlign: 'center'
+    }
+});
