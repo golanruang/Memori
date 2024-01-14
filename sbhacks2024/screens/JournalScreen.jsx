@@ -6,6 +6,16 @@ import { getAuth } from 'firebase/auth';
 const db = getFirestore();
 const auth = getAuth();
 
+const formatDate = (date) => {
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  return date.toLocaleDateString(undefined, options);
+};
+
 const JournalDetailScreen = ({ route }) => {
   const { journalId } = route.params;
   const [journal, setJournal] = useState(null);
@@ -41,7 +51,7 @@ const JournalDetailScreen = ({ route }) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: `Journal Entry: ${journal.topic}\n\n${journal.text}`,
+        message: `Journal Entry: ${journal.topic}\n${journal.firstOutput.content}\n${journal.firstJournal}\n${journal.secondOutput.content}\n${journal.secondJournal}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -68,7 +78,11 @@ const JournalDetailScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{journal.topic}</Text>
-      <Text style={styles.content}>{journal.text}</Text>
+      <Text style={styles.content}>{formatDate(journal.createdAt.toDate())}</Text>
+      <Text style={styles.content}>{journal.firstOutput.content}</Text>
+      <Text style={styles.content}>{journal.firstJournal}</Text>
+      <Text style={styles.content}>{journal.secondOutput.content}</Text>
+      <Text style={styles.content}>{journal.secondJournal}</Text>
       <Button onPress={onShare} title="Share Journal" />
     </View>
   );

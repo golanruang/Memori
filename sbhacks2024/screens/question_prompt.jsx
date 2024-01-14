@@ -19,7 +19,8 @@ const QuestionPrompt = ({ route, navigation }) => {
     // Pass both selectedTopic and journal to the ModelResponse screen
     navigation.navigate('ModelResponse', {
       selectedTopic: selectedTopic,
-      journal: journal
+      journal1: journal,
+      firstOutput: output
     });
   };
 
@@ -40,7 +41,7 @@ const QuestionPrompt = ({ route, navigation }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer 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',
           },
         }
       );
