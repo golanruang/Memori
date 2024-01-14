@@ -1,42 +1,14 @@
 import React, { useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ImageBackground,
-} from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, ImageBackground} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native-gesture-handler";
 
-const PreviousScreen = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Select");
+const PreviousScreen = ({ navigation }) => {
+  const [selectedTopic, setSelectedTopic] = useState("Select");
   const handleSubmit = async () => {
-    // if (!selectedCategory) {
-    //   Alert.alert("Please select a category");
-    //   return;
-    // }
-
-    // try {
-    //   const response = await fetch("YOUR_BACKEND_ENDPOINT", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ category: selectedCategory }),
-    //   });
-
-    //   if (response.ok) {
-    //     Alert.alert("Category submitted successfully");
-    //     // Handle successful submission
-    //   } else {
-    //     // Handle errors
-    //     Alert.alert("Submission failed");
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   Alert.alert("An error occurred");
-    // }
+    navigation.navigate('DisplayByTopic', {
+      selectedTopic: selectedTopic
+    });
   };
 
   return (
@@ -50,9 +22,9 @@ const PreviousScreen = () => {
             <Picker
             style={styles.pickerContainer}
             itemStyle={styles.pickerItem}
-            selectedValue={selectedCategory}
+            selectedValue={selectedTopic}
             onValueChange={(itemValue, itemIndex) =>
-                setSelectedCategory(itemValue)
+                setSelectedTopic(itemValue)
             }
             >
             <Picker.Item label="Select Category" value="Select" />
@@ -63,8 +35,8 @@ const PreviousScreen = () => {
             <Picker.Item label="Wisdom" value="Wisdom" />
             <Picker.Item label="Recent Life" value="Recent Life" />
             </Picker>
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Submit</Text>
+            <TouchableOpacity style={styles.button} onPress={(handleSubmit)}>
+              <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </View>
         </ScrollView>
