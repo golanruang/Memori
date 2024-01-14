@@ -1,74 +1,62 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button } from 'react-native';
-import AudioRecorder from './audio_recorder';
-// import { useChatCompletion } from 'openai-streaming-hooks';
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-// Dependencies for callable functions.
-// const {onCall, HttpsError} = require("firebase-functions/v2/https");
-// const {logger} = require("firebase-functions/v2");
+const db = getFirestore();
+const auth = getAuth();
 
-// // Dependencies for the addMessage function.
-// const {getDatabase} = require("firebase-admin/database");
-// const sanitizer = require("./sanitizer");
-
-const ModelResponse = ({ navigation }) => {
-    
-    // const { messages, submitPrompt } = useChatCompletion({
-    //     model: 'gpt-3.5-turbo', 
-    //     apiKey: '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', 
-    //     temperature: 0.5,
-    //   });
-
-
-    // useEffect((time_period) => {
-    //     let prompt_text = `Generate an open ended question for the user about when they were ${'10-20'} years old.`;
-    //     submitPrompt([{ content: prompt_text, role: 'user' }]);
-    // }, []);
-
-    const getGPTOutput = () => {
-        // call firebase function and get GPT 
-
+const saveJournalToFirestore = async (topic, combinedJournal) => {
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        await addDoc(collection(db, "users", user.uid, "journals"), {
+          topic: topic,
+          text: combinedJournal,
+          createdAt: new Date()
+        });
+        //console.log("Journal saved successfully");
+      } catch (error) {
+        console.error("Error saving journal: ", error);
+        // Handle the error appropriately
+      }
     }
+  };
+
+const ModelResponse = ({ route, navigation }) => {
+    const { selectedTopic, journal } = route.params;
+    const [journal2, setJournal2] = useState('');
+
+    const handlePress = () => {
+        const combinedJournal = journal + "\n" + journal2;
+        saveJournalToFirestore(selectedTopic, combinedJournal);
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Main' }], // Replace 'Main' with the name of your initial screen in UserStack
+        });
+    };
 
     return (
-        <View>
-            {/* GPT-Textbox */}
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '40%' }}>
-                <View style={{ width: 300, height: 200, backgroundColor: 'lightblue', padding: 16, borderRadius: 10 }}>
-                    <Text style={{ textAlign: 'left' }}>
-                        <Text>This is the GPT generated prompt</Text>
-                    </Text>
-                </View>
-            </View>
-            
-            {/* Generate New Prompt */}
-            <TouchableOpacity onPress={alert('Generating new!')} style={{ marginTop: 16 }}>
-                <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '35%' }}>
-                    <View style={{ width: 300, height: 40, backgroundColor: 'blue', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: 'white' }}>Generate New Prompt</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-
-            {/* Microphone */}
-            <AudioRecorder navigation={navigation}/>
-
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                
-                <Button
-                    title="Go to EndScreen"
-                    onPress={() => navigation.navigate('EndScreen')}
-                />
-                <Button
-                    title="Question Prompt again"
-                    onPress={() => navigation.navigate('QuestionPrompt')}
-                />
-            </View> 
-        </View>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Follow up question</Text>
+            <Text>Prev response: {journal}</Text>
+            <TextInput
+                placeholder="Write your journal prompt here"
+                value={journal2}
+                onChangeText={setJournal2}
+                multiline
+            />
+            <Button
+                title="Finish Writing"
+                onPress={handlePress}
+            />
+            <Button
+                title="Question Prompt again"
+                onPress={() => navigation.navigate('QuestionPrompt')}
+            />
+        </View>   
       );
-    }
+}
 
 export default ModelResponse;

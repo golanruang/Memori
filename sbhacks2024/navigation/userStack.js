@@ -13,26 +13,26 @@ import PreviousScreen from '../screens/previous';
 import ModelResponse from '../screens/model_response';
 import EndScreen from '../screens/EndScreen';
 import LoadScreen from '../screens/load'
+import JournalDetailScreen from "../screens/JournalScreen";
 import BottomMenu from '../bottomMenu';
 
 const Stack = createStackNavigator();
 
 export default function UserStack() {
   return (
-    <ChatGptProvider>
-      <AppProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
-          <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
-          <Stack.Screen name="PreviousScreen" component={PreviousScreen} options = {{headerShown: false}}/>
-          <Stack.Screen name="SelectTopic" component={SelectTopic} options = {{headerShown: false}} />
-          <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} options = {{headerShown: false}}/>
-          <Stack.Screen name="ModelResponse" component={ModelResponse} options = {{headerShown: false}}/>
-          <Stack.Screen name="EndScreen" component={EndScreen} options = {{headerShown: false}}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AppProvider>
-  </ChatGptProvider>
+    <AppProvider>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Main" component={BottomMenu} options = {{headerShown: false}}/>
+        <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false }} />
+        <Stack.Screen name="JournalDetailScreen" component={JournalDetailScreen} options = {{headerShown: false}} />
+        <Stack.Screen name="PreviousScreen" component={PreviousScreen} options = {{headerShown: false}}/>
+        <Stack.Screen name="SelectTopic" component={SelectTopic} options = {{headerShown: false}} />
+        <Stack.Screen name="QuestionPrompt" component={QuestionPrompt} options = {{headerShown: false}} />
+        <Stack.Screen name="ModelResponse" component={ModelResponse} options = {{headerShown: false}} />
+        <Stack.Screen name="EndScreen" component={EndScreen} options = {{headerShown: false}} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </AppProvider>
   );
 }
