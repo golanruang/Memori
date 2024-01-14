@@ -1,52 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, Button, Text } from 'react-native';
+import axios from 'axios';
 
-const QuestionPrompt = ({ route, navigation }) => {
-    const [selectedTopic, setSelectedTopic] = useState('');
-    const [journal, setJournal] = useState('');
+const ChatGPT35 = () => {
+  const [messages, setMessages] = useState([]);
+  const [inputText, setInputText] = useState('');
+  const [output, setOutput] = useState([]);
 
-    useEffect(() => {
-        if (route.params?.selectedTopic) {
-            setSelectedTopic(route.params.selectedTopic);
+  const sendMessage = async (prompt) => {
+
+    const userMessage = { role: 'user', content: prompt };
+    setMessages([...messages, userMessage]);
+    setInputText('');
+    try {
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [...messages, userMessage],
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer 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',
+          },
         }
-    }, [route.params?.selectedTopic]);
-
-    const handlePress = () => {
-        // Pass both selectedTopic and journal to the ModelResponse screen
-        navigation.navigate('ModelResponse', {
-            selectedTopic: selectedTopic,
-            journal: journal
-        });
-    };
-
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Prompting Question for: {selectedTopic}</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Write your journal prompt here"
-                value={journal}
-                onChangeText={setJournal}
-                multiline
-            />
-            <Button
-                title="Go to ModelResponse"
-                onPress={handlePress}
-            />
-        </View>
-    );
-};
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        marginBottom: 20,
-        fontSize: 18,
-        textAlign: 'center'
+      );
+      const botMessage = {
+        role: 'bot',
+        content: response.data.choices[0].message.content,
+      };
+      setMessages([...messages, botMessage]);
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
-    });
-    
-    export default QuestionPrompt;
+    setOutput(messages);
+  };
+
+  useEffect(() => {
+    let prompt = `Generate a one to two sentence open ended question meant for an elderly citizen about this topic: ${'Youth'}`;
+    sendMessage(prompt);
+  },[]);
+
+  return (
+    <View> 
+        {/* GPT-Textbox */}
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '40%' }}>
+            <View style={{ width: 300, height: 200, backgroundColor: 'lightblue', padding: 16, borderRadius: 10 }}>
+                <Text style={{ textAlign: 'left' }}>
+                    {messages.map((message, index) => (
+                    <Text key={index} style={{ color: message.role === 'user' ? 'blue' : 'green' }}>
+                        {message.content}
+                    </Text>
+                ))}
+                </Text>
+            </View>
+        </View>
+    </View>
+  );
+};
+export default ChatGPT35;
