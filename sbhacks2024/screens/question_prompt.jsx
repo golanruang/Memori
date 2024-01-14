@@ -49,13 +49,13 @@ const QuestionPrompt = ({ route, navigation }) => {
           model: "gpt-3.5-turbo",
           messages: [...messages, userMessage],
           temperature: 1.0,
-          max_tokens: 25,
+          max_tokens: 50,
         },
         {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );
