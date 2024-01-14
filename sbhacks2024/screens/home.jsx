@@ -1,95 +1,124 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React from "react";
+import { ScrollView, View, Text, TouchableOpacity, Image, ImageBackground, StyleSheet } from 'react-native';
+
 
 const HomeScreen = ({ navigation }) => {
     return (
-        <ScrollView style={styles.scrollView}>
-            <View style={styles.container}>
-                <Text style={styles.dateText}>January 13th, 2024</Text>    
-                <Text style={styles.welcomeText}>Welcome to Your Memori</Text>
-                <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('SelectTopic')}>
-                    <Image 
-                        source={{ uri: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5' }}
-                        style={styles.buttonImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.rectangularButton} 
-                    onPress={() => navigation.navigate('PreviousScreen')}
+        <ImageBackground
+            source={require("sbhacks2024/assets/homebackground.jpeg")} // Specify the path to your background image
+            style={styles.backgroundImage}
+        >
+            <ScrollView style={styles.scrollView}>
+                <View style={styles.container}>
+                    <Text style={styles.dateText}>SUN, JAN 14</Text>    
+                    <Text style={styles.welcomeText}>Welcome to Your</Text>
+                    <Text style={styles.memoriText}>Memori</Text>
+                    <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('SelectTopic')}>
+                        <Image
+                            source={require("sbhacks2024/assets/logo.png")}
+                            style={styles.buttonImage}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.rectangularButton} 
+                        onPress={() => navigation.navigate('PreviousScreen')}
                     >
-                    <Text style={styles.buttonText}>View Past Journals</Text>
-                </TouchableOpacity>
-                <Text style={styles.recentText}>Recent Entries</Text>
+                        <Text style={styles.buttonText}>View Past Journals</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.recentText}>Recent Entries</Text>
 
-                <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
-                    <Text style={styles.cardText}>Card 1</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
-                    <Text style={styles.cardText}>Card 2</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
-                    <Text style={styles.cardText}>Card 3</Text>
-                </TouchableOpacity>
-                <Button
-                    title="Go to SelectTopic"
-                    onPress={() => navigation.navigate('SelectTopic')}
-                />
-            </View>
-        </ScrollView>
+                    <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
+                        <Text style={styles.cardText}>Card 1</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
+                        <Text style={styles.cardText}>Card 2</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.recent} onPress={() => onCardPress(1)}>
+                        <Text style={styles.cardText}>Card 3</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </ImageBackground>
     );
 };
 
 const styles = StyleSheet.create({
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover', // You can also use 'contain' or 'stretch'
+        justifyContent: 'center', // Optional: Adjust this based on your layout
+    },
+    scrollView: {
+        flex: 1,
+    },
     container: {
-        backgroundColor: '#fff',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     dateText: {
         marginTop: 50,
-        fontSize: 18,
-        marginBottom: 12,
+        fontSize: 20,
+        marginBottom: 10,
+        fontFamily: 'marcellus',
     },
     welcomeText: {
-        fontSize: 24,
+        fontSize: 38,
+        fontFamily: 'marcellus',
+        textAlign: 'center'
+    },
+    memoriText: {
+        fontSize: 46,
         fontWeight: 'bold',
         marginBottom: 20,
+        fontFamily: 'marcellus',
+        textAlign: 'center'
     },
     circleButton: {
         width: 200,
         height: 200,
         borderRadius: 100,
-        backgroundColor: 'tan', 
+        backgroundColor: '#6c636b', 
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 20,
     },
+
     rectangularButton: {
-        backgroundColor: 'tan', 
+        backgroundColor: '#6c636b', 
         paddingHorizontal: 30, 
         paddingVertical: 10, 
         borderRadius: 5, 
         alignItems: 'center',
         justifyContent: 'center',
-        width: '50%', 
+        width: '60%', 
         marginBottom: 20, 
+        marginTop: 40,
     },
 
     buttonImage: {
-        width: 100, 
-        height: 100, 
-        resizeMode: 'contain',
+        marginTop: 16,
+        marginLeft: 1,
+        width: 510, 
+        height: 510, 
     },
     recentText: {
-        fontSize: 24,
+        fontSize: 27,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginTop: 15,
+        marginBottom: 12,
+        fontFamily: 'marcellus',
+    },
+    buttonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'marcellus',
+        textAlign: 'center',
     },
     recent: {
         width: 300,  
         height: 100, 
-        backgroundColor: '#f0f0f0', 
+        backgroundColor: '#6c636b', 
         marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -101,8 +130,9 @@ const styles = StyleSheet.create({
         borderRadius: 8, 
     },
     cardText: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
+        fontFamily: 'marcellus',
     },
 });
 
