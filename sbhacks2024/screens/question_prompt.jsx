@@ -9,51 +9,19 @@ const QuestionPrompt = ({ route, navigation }) => {
     const [inputText, setInputText] = useState('');
     const [output, setOutput] = useState([]);
 
-  useEffect(() => {
-      if (route.params?.selectedTopic) {
-          setSelectedTopic(route.params.selectedTopic);
-      }
-  }, [route.params?.selectedTopic]);
-
-  const handlePress = () => {
-      // Pass both selectedTopic and journal to the ModelResponse screen
-      navigation.navigate('ModelResponse', {
-          selectedTopic: selectedTopic,
-          journal: journal
-      });
-  };
-
-  const sendMessage = async (prompt) => {
-
-    const userMessage = { role: 'user', content: prompt };
-    setMessages([...messages, userMessage]);
-    
-    try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
-        {
-          model: 'gpt-3.5-turbo',
-          messages: [...messages, userMessage],
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
-          },
+    useEffect(() => {
+        if (route.params?.selectedTopic) {
+            setSelectedTopic(route.params.selectedTopic);
         }
-      );
+    }, [route.params?.selectedTopic]);
 
-      
-    } catch (error) {
-      console.error('Error sending message:', error);
-    }
-    setOutput(messages);
-  };
-
-  useEffect(() => {
-    let prompt = `Generate a one to two sentence open ended question meant for an elderly citizen about this topic: ${'Youth'}`;
-    sendMessage(prompt);
-  },[]);
+    const handlePress = () => {
+        // Pass both selectedTopic and journal to the ModelResponse screen
+        navigation.navigate('ModelResponse', {
+            selectedTopic: selectedTopic,
+            journal: journal
+        });
+    };
 
   const sendMessage = async (prompt) => {
 
@@ -129,6 +97,5 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontSize: 18,
         textAlign: 'center'
-    }
     }
 });
