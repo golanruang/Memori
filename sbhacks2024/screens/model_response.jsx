@@ -76,7 +76,7 @@ const ModelResponse = ({ route, navigation }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );
@@ -93,7 +93,7 @@ const ModelResponse = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    let prompt = `Ask a thought provoking related follow up question to this: ${journal1}`;
+    let prompt = `Ask a casual open-ended related follow up question to this: ${journal1}`;
     sendMessage(prompt);
   }, []);
 

@@ -55,7 +55,7 @@ const QuestionPrompt = ({ route, navigation }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );
@@ -133,7 +133,7 @@ const QuestionPrompt = ({ route, navigation }) => {
         <TextInput
           style={styles.input}
           fontFamily="marcellus"
-          placeholder="Write your journal prompt here"
+          placeholder="Write your Memori entry here"
           fontSize={20}
           value={journal}
           onChangeText={setJournal}

@@ -107,7 +107,7 @@ const JournalDetailScreen = ({ route }) => {
           {"\n"}
         </Text>
         <TouchableOpacity onPress={onShare} style={styles.button}>
-          <Text style={styles.buttonText}>Share Journal</Text>
+          <Text style={styles.buttonText}>Share Memori</Text>
         </TouchableOpacity>
       </View>
   );
