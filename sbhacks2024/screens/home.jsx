@@ -39,6 +39,8 @@ const HomeScreen = ({ navigation }) => {
     );
 };
 
+export default HomeScreen;
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
@@ -106,4 +108,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+

@@ -8,36 +8,39 @@ import BottomMenu from '../bottomMenu';
 
 
 const SelectTopic = ({ navigation }) => {
+    const handlePress = (topic) => {
+        navigation.navigate('QuestionPrompt', { selectedTopic: topic });
+    };
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
                 <Text style={styles.title}>What would you like to talk about today?</Text>
                 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Youth')}>
                     <View style={styles.cardContent}>
                         <MaterialCommunityIcon name="car-child-seat" size={30} color="#000"/>
                         <Text style={styles.cardText}>Youth</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Teen')}>
                     <View style={styles.cardContent}>
                         <MaterialIcon name="emoji-emotions" size={30} color="#000" />
-                        <Text style={styles.cardText}>Second</Text>
+                        <Text style={styles.cardText}>Teen</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Middle')}>
                     <View style={styles.cardContent}>
                         <MaterialIcon name="face" size={30} color="#000" />
-                        <Text style={styles.cardText}>Third</Text>
+                        <Text style={styles.cardText}>Middle</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('QuestionPrompt')}>
+                <TouchableOpacity style={styles.card} onPress={() => handlePress('Late')}>
                     <View style={styles.cardContent}>
                         <MaterialIcon name="grade" size={30} color="#000" style={styles.iconStyle} />
-                        <Text style={styles.cardText}>Fourth</Text>
+                        <Text style={styles.cardText}>Late</Text>
                     </View>
                 </TouchableOpacity>
 
