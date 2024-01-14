@@ -10,23 +10,11 @@ import AudioRecorder from './audio_recorder';
 // const {onCall, HttpsError} = require("firebase-functions/v2/https");
 // const {logger} = require("firebase-functions/v2");
 
-// Dependencies for the addMessage function.
+// // Dependencies for the addMessage function.
 // const {getDatabase} = require("firebase-admin/database");
 // const sanitizer = require("./sanitizer");
 
 const ModelResponse = ({ navigation }) => {
-    
-    // const { messages, submitPrompt } = useChatCompletion({
-    //     model: 'gpt-3.5-turbo', 
-    //     apiKey: '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', 
-    //     temperature: 0.5,
-    //   });
-
-
-    // useEffect((time_period) => {
-    //     let prompt_text = `Generate an open ended question for the user about when they were ${'10-20'} years old.`;
-    //     submitPrompt([{ content: prompt_text, role: 'user' }]);
-    // }, []);
 
     const getGPTOutput = () => {
         // call firebase function and get GPT 
