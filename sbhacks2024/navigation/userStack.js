@@ -13,10 +13,6 @@ import EndScreen from '../screens/EndScreen';
 import LoadScreen from '../screens/load'
 import JournalDetailScreen from "../screens/JournalScreen";
 import BottomMenu from '../bottomMenu';
-import { Animated } from "react-native";
-
-const av = new Animated.Value(0);
-av.addListener(() => {return});
 
 const Stack = createStackNavigator();
 
