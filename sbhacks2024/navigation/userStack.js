@@ -3,6 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppProvider } from '../AppContext'
+import { ChatGptProvider } from 'react-native-chatgpt';
+
 
 import HomeScreen from '../screens/home';
 import SelectTopic from '../screens/select_topic';
