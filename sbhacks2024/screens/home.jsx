@@ -6,6 +6,16 @@ import { getAuth } from "firebase/auth";
 const db = getFirestore();
 const auth = getAuth();
 
+const formatDate = (date) => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+  
+    return date.toLocaleDateString(undefined, options);
+};
+
 const fetchRecentJournals = async () => {
   const user = auth.currentUser;
   if (!user) return [];
@@ -42,7 +52,7 @@ const HomeScreen = ({ navigation }) => {
     };
     return (
         <ImageBackground
-            source={require("sbhacks2024/assets/homebackground.jpeg")} // Specify the path to your background image
+            source={require("sbhacks2024/assets/homebackground.jpeg")} 
             style={styles.backgroundImage}
         >
             <ScrollView style={styles.scrollView}>
@@ -52,7 +62,7 @@ const HomeScreen = ({ navigation }) => {
                     <Text style={styles.memoriText}>Memori</Text>
                     <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('SelectTopic')}>
                         <Image
-                            source={require("sbhacks2024/assets/logo.png")}
+                            source={require("sbhacks2024/assets/logo2.png")}
                             style={styles.buttonImage}
                         />
                     </TouchableOpacity>
@@ -70,8 +80,11 @@ const HomeScreen = ({ navigation }) => {
                         style={styles.recent} 
                         onPress={() => onCardPress(journal.id)}
                     >
-                        <Text style={styles.cardText}>{journal.topic}     {journal.createdAt.toDate().toLocaleDateString()}</Text>
-                        {/* Display a preview of the journal entry */}
+                        <Text style={styles.cardText}>
+                                {formatDate(journal.createdAt.toDate())}
+                                {'\n'} 
+                                {journal.topic}
+                        </Text>
                     </TouchableOpacity>
                 ))}
             </View>
@@ -86,8 +99,8 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
-        resizeMode: 'cover', // You can also use 'contain' or 'stretch'
-        justifyContent: 'center', // Optional: Adjust this based on your layout
+        resizeMode: 'cover', 
+        justifyContent: 'center', 
     },
     scrollView: {
         flex: 1,
@@ -140,8 +153,8 @@ const styles = StyleSheet.create({
     buttonImage: {
         marginTop: 16,
         marginLeft: 1,
-        width: 510, 
-        height: 510, 
+        width: 450, 
+        height: 450, 
     },
     recentText: {
         fontSize: 27,
@@ -155,10 +168,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'marcellus',
         textAlign: 'center',
+        color: '#e7dee9'
     },
     recent: {
-        width: 300,  
-        height: 100, 
+        width: 290,  
+        height: 80, 
         backgroundColor: '#6c636b', 
         marginBottom: 20,
         justifyContent: 'center',
@@ -174,5 +188,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         fontFamily: 'marcellus',
+        color: '#e7dee9',
+        textAlign: 'center'
     },
 });
