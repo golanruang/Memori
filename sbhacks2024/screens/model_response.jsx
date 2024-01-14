@@ -45,7 +45,7 @@ const ModelResponse = ({ navigation }) => {
             </View>
             
             {/* Generate New Prompt */}
-            <TouchableOpacity onPress={handleSendMessage} style={{ marginTop: 16 }}>
+            <TouchableOpacity onPress={alert('Generating new!')} style={{ marginTop: 16 }}>
                 <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '35%' }}>
                     <View style={{ width: 300, height: 40, backgroundColor: 'blue', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ color: 'white' }}>Generate New Prompt</Text>
@@ -70,6 +70,5 @@ const ModelResponse = ({ navigation }) => {
         </View>
       );
     }
-}
 
 export default ModelResponse;
