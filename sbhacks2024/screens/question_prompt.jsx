@@ -3,31 +3,32 @@ import { View, TextInput, Button, Text, StyleSheet  } from 'react-native';
 import axios from 'axios';
 
 const QuestionPrompt = ({ route, navigation }) => {
-    const [selectedTopic, setSelectedTopic] = useState('');
-    const [journal, setJournal] = useState('');
-    const [messages, setMessages] = useState([]);
-    const [inputText, setInputText] = useState('');
-    const [output, setOutput] = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState('');
+  const [journal, setJournal] = useState('');
+  const [messages, setMessages] = useState([]);
+  // const [inputText, setInputText] = useState('');
+  const [prompt, setPrompt] = useState('');
+  const [output, setOutput] = useState('...');
 
-    useEffect(() => {
-        if (route.params?.selectedTopic) {
-            setSelectedTopic(route.params.selectedTopic);
-        }
-    }, [route.params?.selectedTopic]);
+  useEffect(() => {
+      if (route.params?.selectedTopic) {
+          setSelectedTopic(route.params.selectedTopic);
+      }
+  }, [route.params?.selectedTopic]);
 
-    const handlePress = () => {
-        // Pass both selectedTopic and journal to the ModelResponse screen
-        navigation.navigate('ModelResponse', {
-            selectedTopic: selectedTopic,
-            journal: journal
-        });
-    };
+  const handlePress = () => {
+      // Pass both selectedTopic and journal to the ModelResponse screen
+      navigation.navigate('ModelResponse', {
+          selectedTopic: selectedTopic,
+          journal: journal
+      });
+  };
 
   const sendMessage = async (prompt) => {
 
     const userMessage = { role: 'user', content: prompt };
     setMessages([...messages, userMessage]);
-    setInputText('');
+    
     try {
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
@@ -38,15 +39,12 @@ const QuestionPrompt = ({ route, navigation }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer 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',
           },
         }
       );
-      const botMessage = {
-        role: 'bot',
-        content: response.data.choices[0].message.content,
-      };
-      setMessages([...messages, botMessage]);
+
+      
     } catch (error) {
       console.error('Error sending message:', error);
     }
