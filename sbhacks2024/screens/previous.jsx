@@ -68,7 +68,7 @@ const PreviousScreen = ({ navigation }) => {
             }
             >
             <Picker.Item label="Select Category" value="Select" />
-            <Picker.Item label="Youth" value="Youth" />
+            <Picker.Item label="Adolescence" value="Adolescence" />
             <Picker.Item label="Relationships" value="Relationships" />
             <Picker.Item label="Hobbies" value="Hobbies" />
             <Picker.Item label="Achievements" value="Achievements" />

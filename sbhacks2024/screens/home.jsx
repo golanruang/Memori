@@ -70,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
                         style={styles.rectangularButton} 
                         onPress={() => navigation.navigate('PreviousScreen')}
                     >
-                        <Text style={styles.buttonText}>View Past Journals</Text>
+                        <Text style={styles.buttonText}>View Memories</Text>
                     </TouchableOpacity>
                     <Text style={styles.recentText}>Recent Entries</Text>
 
