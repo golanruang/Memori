@@ -8,14 +8,17 @@ import axios from "axios";
 const db = getFirestore();
 const auth = getAuth();
 
-const saveJournalToFirestore = async (topic, combinedJournal) => {
+const saveJournalToFirestore = async (topic, firstOutput, firstJournal, secondOutput, secondJournal) => {
   const user = auth.currentUser;
   if (user) {
     try {
       await addDoc(collection(db, "users", user.uid, "journals"), {
         topic: topic,
-        text: combinedJournal,
-        createdAt: new Date(),
+        firstOutput: firstOutput,
+        firstJournal: firstJournal,
+        secondOutput: secondOutput,
+        secondJournal: secondJournal,
+        createdAt: new Date()
       });
     } catch (error) {
       console.error("Error saving journal: ", error);
@@ -25,14 +28,13 @@ const saveJournalToFirestore = async (topic, combinedJournal) => {
 };
 
 const ModelResponse = ({ route, navigation }) => {
-  const { selectedTopic, journal } = route.params;
-  const [journal2, setJournal2] = useState("");
+  const { selectedTopic, journal1, firstOutput } = route.params;
+  const [journal2, setJournal2] = useState('');
   const [messages, setMessages] = useState([]);
   const [output, setOutput] = useState([]);
 
   const handlePress = () => {
-    const combinedJournal = journal + "\n" + journal2;
-    saveJournalToFirestore(selectedTopic, combinedJournal);
+    saveJournalToFirestore(selectedTopic, firstOutput, journal1, output, journal2);
     navigation.reset({
       index: 0,
       routes: [{ name: "Main" }], // Replace 'Main' with the name of your initial screen in UserStack
@@ -54,9 +56,8 @@ const ModelResponse = ({ route, navigation }) => {
         },
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer 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",
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer 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',
           },
         }
       );
