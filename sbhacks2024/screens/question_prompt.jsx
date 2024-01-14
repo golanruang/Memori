@@ -3,12 +3,11 @@ import { View, TextInput, Button, Text, StyleSheet  } from 'react-native';
 import axios from 'axios';
 
 const QuestionPrompt = ({ route, navigation }) => {
-  const [selectedTopic, setSelectedTopic] = useState('');
-  const [journal, setJournal] = useState('');
-  const [messages, setMessages] = useState([]);
-  // const [inputText, setInputText] = useState('');
-  const [prompt, setPrompt] = useState('');
-  const [output, setOutput] = useState('...');
+    const [selectedTopic, setSelectedTopic] = useState('');
+    const [journal, setJournal] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [inputText, setInputText] = useState('');
+    const [output, setOutput] = useState([]);
 
   useEffect(() => {
       if (route.params?.selectedTopic) {
@@ -56,6 +55,41 @@ const QuestionPrompt = ({ route, navigation }) => {
     sendMessage(prompt);
   },[]);
 
+  const sendMessage = async (prompt) => {
+
+    const userMessage = { role: 'user', content: prompt };
+    setMessages([...messages, userMessage]);
+    setInputText('');
+    try {
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [...messages, userMessage],
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer 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',
+          },
+        }
+      );
+      const botMessage = {
+        role: 'bot',
+        content: response.data.choices[0].message.content,
+      };
+      setMessages([...messages, botMessage]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+    setOutput(messages);
+  };
+
+  useEffect(() => {
+    let prompt = `Generate a one to two sentence open ended question meant for an elderly citizen about this topic: ${selectedTopic}`;
+    sendMessage(prompt);
+  },[]);
+
   return (
     <View> 
         {/* GPT-Textbox */}
@@ -95,5 +129,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontSize: 18,
         textAlign: 'center'
+    }
     }
 });
