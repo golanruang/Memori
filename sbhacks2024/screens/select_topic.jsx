@@ -1,7 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { Image } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+// import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import BottomMenu from '../bottomMenu';
 
 
 const SelectTopic = ({ navigation }) => {
@@ -25,7 +29,7 @@ const SelectTopic = ({ navigation }) => {
                 <MaterialCommunityIcon
                   name="car-child-seat"
                   size={30}
-                  color="#000"
+                  color="#e7dee9"
                 />
                 <Text style={styles.cardText}>Adolescence</Text>
               </View>
@@ -36,7 +40,11 @@ const SelectTopic = ({ navigation }) => {
               onPress={() => handlePress("Relationships")}
             >
               <View style={styles.cardContent}>
-                <MaterialIcon name="emoji-emotions" size={30} color="#000" />
+              <MaterialCommunityIcon
+                  name="heart"
+                  size={30}
+                  color="#e7dee9"
+                />
                 <Text style={styles.cardText}>Relationships</Text>
               </View>
             </TouchableOpacity>
@@ -46,7 +54,7 @@ const SelectTopic = ({ navigation }) => {
               onPress={() => handlePress("Hobbies")}
             >
               <View style={styles.cardContent}>
-                <MaterialIcon name="face" size={30} color="#000" />
+                <FontAwesome5 name="chess-knight" size={30} color="#e7dee9" />
                 <Text style={styles.cardText}>Hobbies</Text>
               </View>
             </TouchableOpacity>
@@ -56,10 +64,10 @@ const SelectTopic = ({ navigation }) => {
               onPress={() => handlePress("Achievements")}
             >
               <View style={styles.cardContent}>
-                <MaterialIcon
-                  name="grade"
-                  size={30}
-                  color="#000"
+                <FontAwesome5
+                  name="trophy"
+                  size={26}
+                  color="#e7dee9"
                   style={styles.iconStyle}
                 />
                 <Text style={styles.cardText}>Achievements</Text>
@@ -71,10 +79,10 @@ const SelectTopic = ({ navigation }) => {
               onPress={() => handlePress("Wisdom")}
             >
               <View style={styles.cardContent}>
-                <MaterialIcon
-                  name="grade"
+                <MaterialCommunityIcon
+                  name="lightbulb-on"
                   size={30}
-                  color="#000"
+                  color="#e7dee9"
                   style={styles.iconStyle}
                 />
                 <Text style={styles.cardText}>Wisdom</Text>
@@ -86,16 +94,15 @@ const SelectTopic = ({ navigation }) => {
               onPress={() => handlePress("Recent Life")}
             >
               <View style={styles.cardContent}>
-                <MaterialIcon
-                  name="grade"
+                <MaterialCommunityIcon
+                  name="clock"
                   size={30}
-                  color="#000"
+                  color="#e7dee9"
                   style={styles.iconStyle}
                 />
                 <Text style={styles.cardText}>Recent Life</Text>
               </View>
             </TouchableOpacity>
-
           </View>
         </ScrollView>
       </ImageBackground>
