@@ -40,7 +40,7 @@ const QuestionPrompt = ({ route, navigation }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer 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',
           },
         }
       );
@@ -59,7 +59,7 @@ const QuestionPrompt = ({ route, navigation }) => {
   useEffect(() => {
     let prompt = `You are generating prompts for an app that seeks to connect elderly people with their family members. Generate an open ended question about ${selectedTopic}.`;
     sendMessage(prompt);
-  }, []); 
+  }, []);
 
   return (
     <View>
@@ -75,14 +75,14 @@ const QuestionPrompt = ({ route, navigation }) => {
           </Text>
         </View>
       </View>
-      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '50%'}}>
-      <TextInput
-        style={styles.input}
-        placeholder="Write your journal prompt here"
-        value={journal}
-        onChangeText={setJournal}
-        multiline
-      />
+      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '50%' }}>
+        <TextInput
+          style={styles.input}
+          placeholder="Write your journal prompt here"
+          value={journal}
+          onChangeText={setJournal}
+          multiline
+        />
       </View>
       <Button
         title="Go to ModelResponse"
