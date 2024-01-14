@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Button, Text, StyleSheet } from "react-native";
+import {
+  Image,
+  View,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import * as Speech from "expo-speech";
 import axios from "axios";
 
@@ -21,12 +29,12 @@ const QuestionPrompt = ({ route, navigation }) => {
     navigation.navigate("ModelResponse", {
       selectedTopic: selectedTopic,
       journal1: journal,
-      firstOutput: output
+      firstOutput: output,
     });
   };
 
   const tts = () => {
-    const allMessages = messages.map(message => message.content).join(" ");
+    const allMessages = messages.map((message) => message.content).join(" ");
     Speech.speak(allMessages);
   };
 
@@ -45,8 +53,9 @@ const QuestionPrompt = ({ route, navigation }) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer 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",
           },
         }
       );
@@ -69,7 +78,7 @@ const QuestionPrompt = ({ route, navigation }) => {
 
   return (
     <View>
-      {/* GPT-Textbox */}
+      <Text style={styles.title}>Journal Prompt:</Text>
       <View
         style={{
           flex: 1,
@@ -81,18 +90,23 @@ const QuestionPrompt = ({ route, navigation }) => {
       >
         <View
           style={{
-            width: 300,
+            marginTop: 20,
+            width: 350,
             height: 200,
-            backgroundColor: "#8d6f98",
+            backgroundColor: "#bfb3ce",
             padding: 16,
             borderRadius: 10,
+            borderWidth: 3, // Border width
+            borderColor: "#8d6f98", // Border color
           }}
         >
-          <Text style={{ textAlign: "left" }}>
+          <Text style={styles.promptText}>
             {messages.map((message, index) => (
               <Text
                 key={index}
-                style={{ color: message.role === "user" ? '#bfb3ce': '#261e29' }}
+                style={{
+                  color: message.role === "user" ? "#bfb3ce" : "#261e29",
+                }}
               >
                 {output.content}
               </Text>
@@ -107,18 +121,28 @@ const QuestionPrompt = ({ route, navigation }) => {
           marginTop: "50%",
         }}
       >
+        <Text style={styles.title}>Response:</Text>
+        <TouchableOpacity style={styles.circleButton} onPress={tts}>
+          <Image
+            source={require("sbhacks2024/assets/sound.png")} // Replace with your image URL
+            style={styles.buttonImage}
+          />
+        </TouchableOpacity>
+
         <TextInput
           style={styles.input}
+          fontFamily="marcellus"
           placeholder="Write your journal prompt here"
-          fontFamily= "marcellus"
-          fontSize= {20}
+          fontSize={20}
           value={journal}
           onChangeText={setJournal}
           multiline
         />
       </View>
-      <Button title="Read Message" onPress={tts} />
-      <Button title="Go to ModelResponse" onPress={handlePress} />
+
+      <TouchableOpacity style={styles.rectangleButton} onPress={handlePress}>
+        <Text style={styles.buttonText}>Click to Continue</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -129,9 +153,68 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  circleButton: {
+    marginTop: -120,
+    width: 60, // Diameter of the circle
+    height: 60, // Diameter of the circle
+    borderRadius: 30, // Half of width/height to make it circular
+    justifyContent: "center", // Center the image vertically
+    alignItems: "center", // Center the image horizontally
+    backgroundColor: "#bfb3ce", // Background color of the button
+    marginBottom: 80,
+  },
+  rectangleButton: {
+    backgroundColor: '#8d6f98', // Button color
+    marginTop: 12,
+    paddingVertical: 10, // Vertical padding
+    borderRadius: 5, // Rounded corners of the rectangle
+    alignItems: 'center', // Center text horizontally
+  },
+  buttonText: {
+    color: "#fff", // Text color
+    fontSize: 20, // Text size
+    fontFamily: "marcellus", // Font family if you have it
+  },
   text: {
     marginBottom: 20,
     fontSize: 18,
     textAlign: "center",
+    fontFamily: "marcellus",
+  },
+  title: {
+    marginTop: 80,
+    fontSize: 30,
+    textAlign: "center",
+    fontFamily: "marcellus",
+    marginBottom: -60,
+  },
+  input: {
+    width: 350,
+    height: 200,
+    backgroundColor: "#bfb3ce",
+    marginTop: 60,
+    padding: 16,
+    borderRadius: 10,
+    fontFamily: "marcellus",
+    fontSize: 20,
+    color: "#261e29", // Text color
+    textAlignVertical: "top", // Align text to the top
+    paddingHorizontal: 10, // Horizontal padding
+    margin: 10, // Margin around the TextInput
+    borderWidth: 3, // Border width
+    borderColor: "#8d6f98", // Border color
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingLeft: 12,
+  },
+  buttonImage: {
+    marginTop: 5,
+    width: 150, // Width of the image (slightly less than the button for padding effect)
+    height: 150, // Height of the image
+    resizeMode: "contain", // Keep the image aspect ratio
+  },
+  promptText: {
+    fontFamily: "marcellus",
+    fontSize: 20,
   },
 });

@@ -4,11 +4,23 @@ import { Button } from "react-native";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
+import * as Speech from "expo-speech";
 
 const db = getFirestore();
 const auth = getAuth();
 
-const saveJournalToFirestore = async (topic, firstOutput, firstJournal, secondOutput, secondJournal) => {
+const tts = () => {
+  const allMessages = messages.map((message) => message.content).join(" ");
+  Speech.speak(allMessages);
+};
+
+const saveJournalToFirestore = async (
+  topic,
+  firstOutput,
+  firstJournal,
+  secondOutput,
+  secondJournal
+) => {
   const user = auth.currentUser;
   if (user) {
     try {
@@ -18,7 +30,7 @@ const saveJournalToFirestore = async (topic, firstOutput, firstJournal, secondOu
         firstJournal: firstJournal,
         secondOutput: secondOutput,
         secondJournal: secondJournal,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
     } catch (error) {
       console.error("Error saving journal: ", error);
@@ -29,12 +41,18 @@ const saveJournalToFirestore = async (topic, firstOutput, firstJournal, secondOu
 
 const ModelResponse = ({ route, navigation }) => {
   const { selectedTopic, journal1, firstOutput } = route.params;
-  const [journal2, setJournal2] = useState('');
+  const [journal2, setJournal2] = useState("");
   const [messages, setMessages] = useState([]);
   const [output, setOutput] = useState([]);
 
   const handlePress = () => {
-    saveJournalToFirestore(selectedTopic, firstOutput, journal1, output, journal2);
+    saveJournalToFirestore(
+      selectedTopic,
+      firstOutput,
+      journal1,
+      output,
+      journal2
+    );
     navigation.reset({
       index: 0,
       routes: [{ name: "Main" }], // Replace 'Main' with the name of your initial screen in UserStack
@@ -56,8 +74,9 @@ const ModelResponse = ({ route, navigation }) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer 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",
           },
         }
       );
@@ -74,7 +93,7 @@ const ModelResponse = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    let prompt = `Ask a thought provoking related follow up question to this: ${journal}`;
+    let prompt = `Ask a thought provoking related follow up question to this: ${journal1}`;
     sendMessage(prompt);
   }, []);
 
@@ -125,10 +144,7 @@ const ModelResponse = ({ route, navigation }) => {
         />
       </View>
       <Button title="Finish Writing" onPress={handlePress} />
-      <Button
-        title="Question Prompt again"
-        onPress={() => navigation.navigate("QuestionPrompt")}
-      />
+      <Button title="Text to Speech" onPress={tts} />
     </View>
   );
 };
