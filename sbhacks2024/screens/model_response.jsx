@@ -76,7 +76,7 @@ const ModelResponse = ({ route, navigation }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );

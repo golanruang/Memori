@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ImageBackground } from "react";
-import { Share, View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { Share,ScrollView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -81,6 +81,7 @@ const JournalDetailScreen = ({ route }) => {
   const backgroundImage = require("sbhacks2024/assets/homebackground.jpeg"); // Replace with the actual path
 
   return (
+    <ScrollView scrollIndicatorInsets = {{right:1}} contentContainerStyle={{ flexgrow: 1,alignItems: "center",minHeight: "100%"  }} style={styles.scrollView}>
       <View style={styles.container}>
         <Text style={styles.title}>{journal.topic}</Text>
         <Text style={styles.date}>
@@ -110,10 +111,16 @@ const JournalDetailScreen = ({ route }) => {
           <Text style={styles.buttonText}>Share Memori</Text>
         </TouchableOpacity>
       </View>
+      
+        </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    
+},
   container: {
     flex: 1,
     padding: 20,
